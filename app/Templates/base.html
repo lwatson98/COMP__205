@@ -1,0 +1,14 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - ITHACA MUSIC</title>
+      {% else %}
+      <title>Welcome to ITHACA MUSIC</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>ITHACA MUSIC: <a href="/index">Home</a> <a href="/artists">Artists</a><a href="new_artist.html"> New Artists</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
