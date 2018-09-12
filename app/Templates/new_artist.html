@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+   {% for warning in warning %}
+<div><h1><b>{{ warning.body }}</b></h1></div>
+    {% endfor %}
+{% endblock %}

@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>List of Artists:</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.artists }}</p></div>
+    {% for artists in artists %}
+<div><p><a href ='/Tears'>{{ artists.band.name }}</a></p></div>
     {% endfor %}
 {% endblock %}
