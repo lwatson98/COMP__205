@@ -30,6 +30,7 @@ def Tears():
     ]
 
     return render_template('Tears.html', title="Home", info=info);
+<<<<<<< HEAD
 @app.route('/new_artist', methods=['GET', 'POST'])
 def Newartists():
 
@@ -39,3 +40,13 @@ def Newartists():
             form.username.data, form.remember_me.data))
         return render_template('new_artist.html', title="Home", form=form);
     return render_template('new_artist.html', title="Home", form=form);
+=======
+@app.route('/new_artist')
+def Newartists():
+
+    warning =[
+        {'body': 'Under Construction'}
+    ]
+
+    return render_template('new_artist.html', title="Home", warning=warning);
+>>>>>>> origin/master

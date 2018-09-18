@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<<<<<<< HEAD
     <h1>Tears</h1>
 
     <div><p>{{ artists.author }}</p></div>
+=======
+    <h1>The Tears</h1>
+
+   {% for info in info %}
+<div><p>{{ info.body }}</p></div>
+
+>>>>>>> origin/master
     {% endfor %}
 {% endblock %}
