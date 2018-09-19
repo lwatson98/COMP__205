@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect
 from app import app
-from app.forms import LoginForm
+from app.forms import NewArtistForm
 
 
 @app.route('/')
@@ -25,28 +25,26 @@ def artists():
 @app.route('/Tears')
 def Tears():
 
-    info =[
-        {'body': 'Tears is an Upstate NY, hard rockin, boogie band assembled by bassist, Jeff Howell, formerly of Foghat, The Outlaws and Savoy Brown, to name a few.'}
-    ]
+    info ={'bandname':'Tears','hometown':'Ithaca', 'body': 'Tears is an Upstate NY, hard rockin, boogie band assembled by bassist, Jeff Howell, formerly of Foghat, The Outlaws and Savoy Brown, to name a few.'}
+
 
     return render_template('Tears.html', title="Home", info=info);
-<<<<<<< HEAD
+
 @app.route('/new_artist', methods=['GET', 'POST'])
 def Newartists():
 
-    form = LoginForm()
+    form = NewArtistForm()
     if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return render_template('new_artist.html', title="Home", form=form);
+        information = {}
+
+        information['bandname']=form.username.data
+        information['hometown'] = form.hometown.data
+        information['body']=form.description.data
+        return render_template('Tears.html', title="Home", info=information);
+
+
+
+
+
     return render_template('new_artist.html', title="Home", form=form);
-=======
-@app.route('/new_artist')
-def Newartists():
 
-    warning =[
-        {'body': 'Under Construction'}
-    ]
-
-    return render_template('new_artist.html', title="Home", warning=warning);
->>>>>>> origin/master
