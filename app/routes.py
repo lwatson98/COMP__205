@@ -1,6 +1,10 @@
 from flask import render_template, flash, redirect
 from app import app
+
 from app.forms import NewArtistForm
+
+from app.forms import LoginForm
+
 
 
 @app.route('/')
@@ -30,6 +34,7 @@ def Tears():
 
     return render_template('Tears.html', title="Home", info=info);
 
+
 @app.route('/new_artist', methods=['GET', 'POST'])
 def Newartists():
 
@@ -46,5 +51,16 @@ def Newartists():
 
 
 
+    return render_template('new_artist.html', title="Home", form=form);
+
+
+@app.route('/new_artist', methods=['GET', 'POST'])
+def Newartists():
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return render_template('new_artist.html', title="Home", form=form);
     return render_template('new_artist.html', title="Home", form=form);
 
