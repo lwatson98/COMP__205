@@ -1,7 +1,8 @@
 from flask import render_template, flash, redirect
-from app import app
+from app import app,db
 
 from app.forms import NewArtistForm
+from app.models import *
 
 from app.forms import LoginForm
 
@@ -54,13 +55,43 @@ def Newartists():
     return render_template('new_artist.html', title="Home", form=form);
 
 
-@app.route('/new_artist', methods=['GET', 'POST'])
-def Newartists():
+# @app.route('/new_artist', methods=['GET', 'POST'])
+# def Newartists():
+#
+#     form = LoginForm()
+#     if form.validate_on_submit():
+#         flash('Login requested for user {}, remember_me={}'.format(
+#             form.username.data, form.remember_me.data))
+#         return render_template('new_artist.html', title="Home", form=form);
+#     return render_template('new_artist.html', title="Home", form=form);
+@app.route('/reset_db')
+def reset_db():
+   flash("Resetting database: deleting old data and repopulating with dummy data")
+   # clear all data from all tables
+   meta = db.metadata
+   for table in reversed(meta.sorted_tables):
+       print('Clear table {}'.format(table))
+       db.session.execute(table.delete())
+   db.session.commit()
 
-    form = LoginForm()
-    if form.validate_on_submit():
-        flash('Login requested for user {}, remember_me={}'.format(
-            form.username.data, form.remember_me.data))
-        return render_template('new_artist.html', title="Home", form=form);
-    return render_template('new_artist.html', title="Home", form=form);
+   a1= Artist(Artistname="The Tears",genre="Rock",gig="Ithaca Theater",body="Just Rocking and Jamming")
+   db.session.add(a1)
+
+   a2 = Artist(Artistname="The Blasts", genre="Punk", gig="Ithaca Gorges", body="Rocking like a Hurricane")
+   db.session.add(a2)
+   a3 = Artist(Artistname="Feed the Fire", genre="Reggae", gig="Busy Bee Market", body="We Jammin and we Hope you like Jammmin to")
+   db.session.add(a3)
+   v1 = Venue(Venuename="College Bagel Steppers", currentPerformer="The Tears")
+   db.session.add(v1)
+   v2 = Venue(Venuename="Ins and Outs of Mind", currentPerformer="The Blasts")
+   db.session.add(v2)
+   e1 = Event(Eventname="Ithaca Theater")
+   db.session.add(e1)
+   e2 = Event(Eventname="Ithaca Gorges")
+   db.session.add(e2)
+   db.session.commit()
+
+   a2e1 = ArtisttoEvent(artist=a1, event=e1)
+   a2e2 = ArtisttoEvent(artist=a2, event=e2)
+
 
